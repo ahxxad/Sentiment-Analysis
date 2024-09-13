@@ -13,6 +13,7 @@ install.packages("syuzhet")
 install.packages("lubridate")
 install.packages("qdapRegex")
 install.packages( "bnlearn")
+install.packages("shiny")
 
 ptm <- proc.time()
 #Loading Packages
@@ -39,7 +40,7 @@ getwd()
 
 #Reading NUS data set from a SQL DB
 DBD = dbDriver("MySQL");
-setcon2db = dbConnect(DBD,user='root',password='MAVE88rick!(88',host='localhost',dbname='sms');
+setcon2db = dbConnect(DBD,user='root',password='MAVE8*rick!(*8<-=MySQL',host='localhost',dbname='sms');
 impodf = dbSendQuery(setcon2db, "select * from new_sms_download")
 nussms = fetch(impodf, n = -1)
 View(nussms)
@@ -51,6 +52,11 @@ View(smscontent)
 class(smscontent)
 class(smscontent$SMS)
 summary(smscontent$SMS)
+
+sms <- smscontent$SMS
+write.table(smscontent$SMS, "sms.txt", quote = FALSE, row.names = FALSE, 
+            col.names = TRUE, fileEncoding ="UTF-8")
+
 
 #Removing duplicated sms using unique
 smscontent = unique(smscontent)
@@ -74,6 +80,9 @@ smscontent$SMS = gsub("<TIME>", "", smscontent$SMS)
 smscontent$SMS = gsub("<DATE>", "", smscontent$SMS)
 smscontent$SMS = gsub("<DECIMAL>", "", smscontent$SMS)
 smscontent$SMS = gsub("<#>", "", smscontent$SMS)
+
+
+
                 
 
 ###!1 Handling smiles punctuations or 2 ==>
@@ -116,7 +125,7 @@ smscontent$SMS = gsub("<#>", "", smscontent$SMS)
 #summary(grepl("[^a-zA-Z\\s]",smscontent$SMS))
 #smscontent$SMS = gsub("[^a-zA-Z\\s]", "", smscontent$SMS)
 
-##Preprocessing 2 
+##Preprocessing 2
 # Remove everything that is not a number or letter
 #smscontent$SMS = stringr::str_replace_all(smscontent$SMS,"[^a-zA-Z\\s]", " ")
 
