@@ -37,7 +37,7 @@ library(openNLP)
 library(dtt)
 getwd()
 .jinit()
-
+#
 #Reading NUS data set from a SQL DB
 DBD = dbDriver("MySQL");
 setcon2db = dbConnect(DBD,user='root',password='MAVE8*rick!(*8<-=MySQL',host='localhost',dbname='sms');
